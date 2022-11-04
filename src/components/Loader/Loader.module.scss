@@ -1,0 +1,14 @@
+.loaderWrapper {
+	min-width: 100px;
+	aspect-ratio: 1/1;
+	max-width: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+	
+}

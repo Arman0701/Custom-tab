@@ -1,0 +1,17 @@
+@import "../../sass/variables.scss";
+
+.linkWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 5px;
+	margin: 5px 5px;
+	border: 2px solid white;
+	border-radius: 5px;
+	overflow: hidden;
+	cursor: pointer;
+
+	span {
+		color: white
+	}
+}

@@ -1,0 +1,60 @@
+@import "../../sass/variables.scss";
+
+.formWrapper {
+    width: fit-content;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin: 5px;
+
+    input {
+        padding: 4px 8px;
+        border: none;
+        border-bottom: 2px solid white;
+        font-size: 15px;
+        background: $--black-04;
+        border-radius: 4px;
+        color: white;
+
+        &::placeholder {
+            color: white;
+            font-size: 15px;
+        }
+        &:first-child {
+            margin-right: 5px;
+        }
+        &:last-child {
+            margin-left: 5px;
+        }
+    }
+
+    button {
+        padding: 5px;
+        border: none;
+        border-bottom: 2px solid white;
+        border-radius: 5px;
+        margin-left: 5px;
+		background: none;
+		color: white;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: -20px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100px;
+			height: 100px;
+			transition: $--transition;
+			background: $--black-04;
+			z-index: -1;
+			border-radius: 100%;
+		}
+		&:hover:after {
+			bottom: 100px;
+		} 
+    }
+}

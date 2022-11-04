@@ -1,0 +1,99 @@
+@import "../../sass/variables.scss";
+
+.loginPageWrapper {
+    width: 100vw;
+    height: $--abs-height;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 40vw;
+
+        > * {
+            width: 100%;
+            margin: 5px 0;
+            padding: 5px 0;
+            border: none;
+            border-bottom: 2px solid white;
+            background: none;
+            color: white;
+            font-size: 17px;
+        }
+
+        input {
+			padding-top: 12px;
+            &::placeholder {
+                color: white;
+				position: absolute;
+				transition: $--transition;
+            }
+			&:focus::placeholder {
+				transform: translateY(-90%);
+				font-size: 12px;
+			}
+        }
+        button {
+            color: white;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+			padding-bottom: 25px;
+
+			span {
+				position: absolute;
+				transform: translateX(-50%);
+				z-index: 1;
+			}
+
+            &:after {
+                content: "";
+                position: absolute;
+				transform: translateX(-50%);
+				left: 50%;
+				bottom: -20px;
+                width: 100%;
+				height: 100px;
+				background: $--black-04;
+				transition: $--transition;
+            }
+
+            &:hover:after {
+				left: 100%;
+				width: 0%;
+            }
+        }
+		footer {
+			margin-top: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: $--transition;
+			cursor: pointer;
+			font-size: 15px;
+			border: none;
+
+			.footerIconWrapper {
+				width: 15px;
+				height: 15px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-right: 10px;
+
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+    }
+}

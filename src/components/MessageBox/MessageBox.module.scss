@@ -1,0 +1,36 @@
+@import "../../sass/variables.scss";
+
+.box {
+	max-width: min-content;
+	min-width: 350px;
+	width: fit-content;
+	height: fit-content;
+	color: white;
+	border-radius: 5px;
+	background: $--black-04;
+}
+.boxMessage {
+	padding: 8px 15px;
+	font-size: 15px;
+	text-align: center;
+	font-weight: 600;
+}
+.buttons {
+	/* margin-top: 15px; */
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.button {
+	cursor: pointer;
+	transition: 0.3s;
+	margin: 3px 8px;
+	padding: 3px 8px;
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: 500;
+}
+.button:hover {
+	border-radius: 0;
+}

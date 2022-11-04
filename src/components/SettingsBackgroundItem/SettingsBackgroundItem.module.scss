@@ -1,0 +1,28 @@
+@import "../../sass/variables.scss";
+
+.bgItemWrapper {
+	width: 100%;
+	aspect-ratio: 16/9;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	border-radius: 8px;
+
+	img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 5px;
+	}
+
+	p {
+		padding: 5px 8px;
+		background: $--black-04;
+		color: white;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+	}
+}

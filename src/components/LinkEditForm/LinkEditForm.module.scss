@@ -1,0 +1,32 @@
+@import "../../sass/variables.scss";
+
+.linkEditForm {
+	margin-bottom: 10px;
+    width: fit-content;
+    padding: 5px;
+    border: 2px solid black;
+	border-radius: 5px;
+    margin: 5px;
+	background: $--black-04;
+
+    input {
+        padding: 4px 8px;
+        border: none;
+        border-bottom: 2px solid white;
+        font-size: 15px;
+        background: $--black-04;
+        border-radius: 4px;
+        color: white;
+
+        &::placeholder {
+            color: white;
+            font-size: 15px;
+        }
+        &:first-child {
+            margin-right: 5px;
+        }
+        &:last-child {
+            margin-left: 5px;
+        }
+    }
+}

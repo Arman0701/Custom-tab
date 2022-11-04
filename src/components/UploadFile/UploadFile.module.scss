@@ -1,0 +1,81 @@
+@import "../../sass/variables.scss";
+
+.fileUploaderWrapper {
+    width: 60vw;
+	height: auto;
+	transition: height $--transition;
+    max-height: 80vh;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $--black-04;
+    backdrop-filter: blur(5px);
+    padding: 8px;
+	padding-bottom: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+	
+	h3 {
+		width: 100%;
+		margin-bottom: 5px;
+		color: white;
+	}
+
+    .fileUploaderHeader {
+        input[type="file"] {
+            display: none;
+        }
+
+		progress {
+			width: calc(100% - 10px);
+			height: 7px;
+			border-radius: 5px;
+			overflow: hidden;
+			position: absolute;
+			bottom: 5px;
+			left: 5px;
+			background: $--black-04;
+		}
+
+        button {
+            padding: 6px 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 400;
+            font-size: 16px;
+            border: 1px solid white;
+            background: white;
+            margin: 0 10px;
+            cursor: pointer;
+
+            &:active {
+                box-shadow: rgba(50, 50, 93, 0.086) 0px 30px 60px -12px inset,
+                    rgba(0, 0, 0, 0.125) 0px 18px 36px -18px inset;
+            }
+
+            &.openBtn {
+                color: $--primary;
+            }
+            &.uploadBtn {
+                color: white;
+                background: $--primary;
+                border: 1px solid $--primary;
+            }
+            &:nth-child(n) {
+                margin-right: 0px;
+            }
+            &:nth-child(2n) {
+                margin-left: 0px;
+            }
+        }
+    }
+
+	.preview {
+		margin-top: 10px;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 5px;
+	}
+}

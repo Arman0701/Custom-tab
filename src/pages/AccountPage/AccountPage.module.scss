@@ -1,0 +1,99 @@
+@import "../../sass/variables.scss";
+
+.accountPageWrapper {
+    width: 100vw;
+    height: 87.9%;
+    color: white;
+
+    .accountPageHeader {
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        font-size: 17px;
+        font-size: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+            rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        .headerTitle {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                margin-right: 10px;
+            }
+        }
+
+        .accountNavbar {
+            button {
+                margin: 5px;
+                padding: 5px 8px;
+                border: 1px solid white;
+                border-radius: 4px;
+                font-size: 15px;
+                cursor: pointer;
+                color: white;
+                background: none;
+            }
+        }
+    }
+
+    main {
+        width: 100%;
+        display: flex;
+        padding: 0 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+            rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        .userBlock {
+            width: 30%;
+            padding: 10px;
+            background: $--black-04;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+                rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+            .userImage {
+                width: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 2px solid white;
+            }
+        }
+
+        .content {
+            width: 70%;
+        }
+    }
+}
+
+
+.accountSttingButtonsWrapper {
+	padding: 5px;
+	backdrop-filter: blur(5px);
+	border-radius: 5px;
+	margin-top: 5px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.accountSettingButton {
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: $--transition;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    &:hover {
+		transition: $--transition;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
+}

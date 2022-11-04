@@ -1,0 +1,17 @@
+.dateTime {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	min-width: 200px;
+	color: white;
+}
+.dateTime p:first-child {
+	font-size: 32px;
+	margin-right: 12px;
+	text-align: center;
+	width: 125px;
+}
+.dateTime p:last-child {
+	width: 60px;
+	text-align: center;
+}

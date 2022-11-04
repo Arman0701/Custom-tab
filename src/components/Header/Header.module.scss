@@ -1,0 +1,37 @@
+@import "../../sass/variables.scss";
+
+.headerWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: 2px solid white;
+
+	.headerButtons {
+		display: flex;
+		align-items: center;
+
+		.buttonWrapper {
+			width: 30px;
+			aspect-ratio: 1/1;
+			border: 2px solid transparent;
+			border-radius: 4px;
+			padding: 4px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 15px;
+			transition: $--transition;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+
+			&:hover {
+				border: 2px solid white;
+			}
+		}
+	}
+}

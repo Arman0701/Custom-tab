@@ -1,0 +1,35 @@
+@import "../../sass/variables.scss";
+
+.notesPageWrapper {
+    width: 100%;
+    height: $--abs-height;
+    padding: 10px 15px;
+    background: $--black-04;
+
+    .tabsBlock {
+        width: 500px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+
+        button {
+            color: white;
+            font-weight: 600;
+            width: 250px;
+            text-align: center;
+            border: 1px solid white;
+            padding: 5px 0;
+            margin: 0 3px;
+            cursor: pointer;
+            background: $--white-04;
+			font-size: 17px;
+			font-weight: 100;
+            border-radius: 15px;
+
+            &:active {
+                box-shadow: rgba(83, 83, 91, 0.25) 0px 30px 60px -12px inset,
+                    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+            }
+        }
+    }
+}
