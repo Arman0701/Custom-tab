@@ -1,0 +1,33 @@
+@import "../../sass/variables.scss";
+
+.editPopupWrapper {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 8px;
+    border: 2px solid $--white-04;
+    border-radius: 5px;
+    background: $--black-04;
+    backdrop-filter: blur(5px);
+    gap: 5px;
+
+    input[type=text],
+    button {
+		color: white;
+		font-size: 15px;
+        background: none;
+        padding: 3px 8px;
+        border: none;
+        border-bottom: 2px solid $--white-04;
+    }
+	button {
+		cursor: pointer;
+		padding: 3px 15px;
+	}
+    input[type=text] {
+		&::placeholder {
+			color: white;
+			font-size: 15px;
+		}
+	}
+}

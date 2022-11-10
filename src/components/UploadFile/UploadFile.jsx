@@ -7,14 +7,14 @@ import FilePreview from "../../components/FilePreview";
 import style from "./UploadFile.module.scss";
 import addToDb from "../../helpers/addToDb";
 
-export default function UploadFile({multiple, accept=[], }) {
+export default function UploadFile({ options }) {
 	const inputRef = useRef();
+	const { multiple, accept, storagePath, dbPath, sliceValue = null } = options
+	console.log('Log options ::: ', options)
 	const { uid, firstName, lastName } = useSelector(store => store.userSlice.value)
-	const settings = useSelector(store => store.settingsSlice.value) || []
     const [ progress, setProgress ] = useState(0)
 	const [ files, setFiles ] = useState()
 
-	console.log('Log user.settings.backgroundImages ::: ', settings.backgroundImages)
 	const removeCb = useCallback((target) => {
 		setFiles(files.filter(file => file.name !== target.name))
 	}, [files])
@@ -22,7 +22,7 @@ export default function UploadFile({multiple, accept=[], }) {
 	function uploadHandler() {
 		const promises = [];
         files && files.forEach((file) => {
-            const storageRef = ref(storage, `users/${uid}-${firstName}-${lastName}/background-images/${file.name}`);
+            const storageRef = ref(storage, `users/${uid}-${firstName}-${lastName}/${storagePath}/${file.name}`);
             const uploadFile = uploadBytesResumable(storageRef, file);
 			promises.push(uploadFile)
 
@@ -44,7 +44,7 @@ export default function UploadFile({multiple, accept=[], }) {
 							name: file.name,
 							isActive: false
 						}
-						addToDb(`/settings/backgroundImages`, [...settings.backgroundImages, imageData])
+						addToDb(`${dbPath}`, sliceValue ? [...sliceValue, imageData] : imageData)
                     })
                 }
             );

@@ -55,13 +55,15 @@ export default function Settings() {
 						<h3>Background Images</h3>
 						<div className={style.images}>
 							{backgroundImages?.length > 0 && backgroundImages.map(image => <SettingsBackgroundItem key={image.id} item={image} />)}
-						</div>	
+						</div>
+						{!backgroundImages?.length && <p>You can add new background images from account page.</p>}
 					</div>
 					<div className={style.themesBlock}>
 						<h3>Themes</h3>
 						<div className={style.themes}>
 							{themes?.length > 0 && themes.map((theme) => <SettingsThemeItem key={theme.id} item={theme} />)}
 						</div>
+						{!themes?.length && <p>You can add new themes from account page.</p>}
 					</div>
 					<div className={style.textDecorationBlock}>
 						<div className={style.block}>

@@ -22,6 +22,8 @@
         }
         input[type="text"] {
             width: 80%;
+			border: 2px solid $--white-04;
+			border-top: none;
 
             &::placeholder {
                 color: white;
@@ -31,7 +33,6 @@
             width: 20%;
 			transition: $--transition;
             cursor: pointer;
-            border-left: 2px solid $--white-04;
 
             &:active {
                 background: $--white-04;
@@ -45,16 +46,11 @@
 		select {
 			outline: none;
 			font-size: 15px;
-			
+			cursor: pointer;
+			padding: 3px;
 
 			option {
-				font-size: 14px;
-				padding: 4px 6px;
-				margin: 2px 0;
-				border-radius: 3px;
-				background: rgba(#ccc, 1);
-				color: white;
-
+				background: $--black-04;
 			}
 		}
     }

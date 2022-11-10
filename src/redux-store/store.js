@@ -14,5 +14,5 @@ export default configureStore({
 		notesSlice,
 		settingsSlice,
 		searchSlice,
-	}
+	},
 })
