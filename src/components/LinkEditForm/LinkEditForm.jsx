@@ -8,20 +8,21 @@ export default function LinkEditForm({ link }) {
     const addressRef = useRef(link.address);
     const dispatch = useDispatch();
 
-    const formSubmitHandler = useCallback((e) => {
-		if (e.key === "Enter") {
-			dispatch(editLink({
-				id: link.id,
-				title: titleRef.current.value,
-				address: addressRef.current.value,
-			}));
-		}
-    }, []);
+    function formSubmitHandler(e) {
+		e.preventDefault(e)
+
+		dispatch(editLink({
+			id: link.id,
+			title: titleRef.current.value,
+			address: addressRef.current.value,
+		}))
+	}
 
     return (
-        <div className={style.linkEditForm} onKeyDown={formSubmitHandler}>
-            <input type="text" placeholder="Link title" ref={titleRef} />
-            <input type="text" placeholder="Link address" ref={addressRef} />
-        </div>
+        <form className={style.linkEditForm} onSubmit={formSubmitHandler}>
+            <input type="text" placeholder="Link title" defaultValue={link.title} ref={titleRef} />
+            <input type="text" placeholder="Link address" defaultValue={link.address} ref={addressRef} />
+			<button onClick={formSubmitHandler}>Create</button>
+        </form>
     );
 }
