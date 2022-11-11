@@ -79,7 +79,6 @@ export const notesSlice = createSlice({
 			addToDb("/notes/todoList", [ ...state.value.todoList])
 		},
 		toggleTodoState(state, {payload}) {
-			console.log('asdfasdf');
 			state.value.todoList = [...state.value.todoList.map(todo => {
 				if (todo.id === payload) {
 					return {

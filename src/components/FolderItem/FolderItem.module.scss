@@ -7,8 +7,8 @@
     border: 2px solid $--white-04;
     backdrop-filter: blur(5px);
     color: white;
-    cursor: pointer;
 	transition: all $--transition;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 
     &:hover {
         box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
@@ -18,11 +18,6 @@
     p {
         font-size: 15px;
 
-        &.info {
-            margin-top: 20px;
-            font-size: 10px;
-			text-align: right;
-        }
         &.description {
             font-size: 13px;
         }
@@ -31,9 +26,9 @@
         }
     }
 
-    > * {
-        margin-bottom: 6px;
-    }
+	.folderTrigger {
+		cursor: pointer;
+	}
 
     .cardIconWrapper {
         position: relative;
@@ -56,4 +51,29 @@
             height: 100%;
         }
     }
+
+	footer {
+		cursor: auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 5px;
+		
+		.info {
+            font-size: 10px;
+        }
+
+		.iconWrapper {
+			width: 20px;
+			aspect-ratio: 1/1;
+			cursor: pointer;
+			padding: 4px;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
 }

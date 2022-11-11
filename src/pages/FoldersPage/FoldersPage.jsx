@@ -38,7 +38,7 @@ export default function FoldersPage() {
                     <NewFolderPopup />
                 </Popup>
 				{/* <Loader
-					trigger={!Object.values(folders)[0]}
+					trigger={!(folders[0])}
 					customStyles={{
 						position: "absolute",
 						top: "50%",
@@ -48,13 +48,11 @@ export default function FoldersPage() {
 					}}
 				/> */}
                 <div className={style.foldersWrapper}>
-                    {Object.values(folders)[0] &&
-                        Object.values(folders).map((folder) => {
-                            return <FolderItem key={folder.id} item={folder} />
-						})
+                    {folders.length &&
+                        folders.map((folder) => <FolderItem key={folder.id} item={folder} />)
 					}
                     <MessageBox
-                        trigger={!Object.values(folders).length}
+                        trigger={!folders.length}
                         message="No folders yet! You can add that by click on plus in top left corner."
                         customStyles={{
                             position: "absolute",

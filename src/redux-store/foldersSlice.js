@@ -13,124 +13,59 @@ export const foldersSlice = createSlice({
 			if (payload) state.value = payload;
 		},
 		addFolder(state, {payload}) {
-			if (payload.name) {
-				const folderID = getID()
-				const newFolder = {
-					id: folderID,
-					name: payload.name,
-					description: payload.description || "",
-					links: [],
-					bgColor: payload.bgColor === "#000000" ? "rgba(white, 0.4)" : payload.bgColor,
-					creationDate: new Date().toLocaleDateString("en-US", {
-						weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric"
-					}),
-				}
-				
-				state.value = [ ...state.value, newFolder ]
-				setTimeout(() => {
-					addToDb(`folders/`, state.value)
-				}, 1500)
+			const newFolder = {
+				id: getID(),
+				name: payload.name,
+				description: payload.description || "",
+				links: [],
+				bgColor: payload.bgColor === "#000000" ? "rgba(white, 0.4)" : payload.bgColor,
+				creationDate: new Date().toLocaleDateString("en-US", {
+					weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: "numeric", minute: "numeric"
+				}),
+			}
+			state.value = [...state.value, newFolder]
+			addToDb("folders/", state.value)
 			}
 		},
-		removeFolder(state, {payload}) {
-			state.value = state.value.filter(item => item.id !== payload.folderID)
-			addToDb(`folders/`, state.value)
+		removeFolder(state, {payload}) { // folderID
+			state.value = state.value.filter(folder => folder.id !== payload.folderID)
+			addFolder("folders/", state.value)
 		},
-		editFolder(state, {payload}) {
-			state.value = state.value.map(item => {
-				if (item.id === payload.folderID) {
+		editFolder(state, {payload}) { // folderID, title, description, bgColor
+			console.log('Log payload ::: ', payload)
+			state.value = state.value.map(folder => {
+				if (folder.id === payload.folderID) {
 					return {
-						...item,
-						title: payload.title,
-						description: payload.description
+						...folder,
+						name: payload.name,
+						description: payload.description,
+						bgColor: payload.bgColor
 					}
 				}
+				return folder;
 			})
-			addToDb(`folders/`, state.value)
+			addFolder("folders/", state.value)
 		},
 
 // ====================================================================
 // ====================================================================
 
 		addLinkInFolder(state, {payload}) {
-			if (payload.address && payload.title) {
-				const linkID = getID()
-				const newLink = {
-					id: linkID,
-					title: payload.title,
-					address: payload.address,
-					isFavourite: false,
-				};
-				console.log('Log state.value ::: ', state.value)
-
-				state.value = state.value.map(item => {
-					if (item.id === payload.folderID) {
-						return {
-							...item,
-							links: [
-								...item.links,
-								newLink
-							]
-						}
-					}
-					return item
-				})
-				addToDb(`folders/${payload.folderID}/`, state.value) ////////////////
-			}
+			
 		},
 		removeLinkFromFolder(state, {payload}) {
-			state.value = state.value.map(item => {
-				if (item.id === payload.folderID) {
-					const links = item.links.filter(link => link.id !== payload.linkID)
-					return {
-						...item,
-						links,
-					}
-				}
-			})
-			addToDb(`folders/${payload.folderID}/`, state.value) /////////////////
+			
 		},
 		editLinkInFolder(state, {payload}) {
-			if (payload.title && payload.address) {
-				state.value = state.value.map(item => {
-					if (item.id === payload.folderID) {
-						const links = item.links.map(link => {
-							if (link.id === payload.linkID) {
-								return {
-									...link,
-									title: payload.title,
-									address: payload.address,
-								}
-							}
-							return link;
-						})
-						return {
-							...item,
-							links
-						}
-					}
-					return item;
-				})
-				addToDb(`folders/${payload.folderID}/`, state.value)
-			}
-		},
-		toggleFavStateInFolder(state, {payload}) {
-			let link = state.value[payload.folderID].links[payload.linkID]
-			console.log('Log link ::: ', link)
-			link = {
-				...link,
-				isFavourite: !link.isFavourite
-			}
-			addToDb(`folders/${payload.folderID}/links/${payload.linkID}`, link)
-		}
+			
 	},
 
-	extraReducers: (builder) => {
-		builder.addCase(logout, state => {
-			console.log("folders");
-			state.value = {}
-		})
-	}
+	// extraReducers: (builder) => {
+	// 	builder.addCase(logout, state => {
+	// 		console.log("folders");
+	// 		state.value = {}
+	// 	})
+	// }
 });
 
 export const {

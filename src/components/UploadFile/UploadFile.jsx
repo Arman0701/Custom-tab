@@ -10,7 +10,6 @@ import addToDb from "../../helpers/addToDb";
 export default function UploadFile({ options }) {
 	const inputRef = useRef();
 	const { multiple, accept, storagePath, dbPath, sliceValue = null } = options
-	console.log('Log options ::: ', options)
 	const { uid, firstName, lastName } = useSelector(store => store.userSlice.value)
     const [ progress, setProgress ] = useState(0)
 	const [ files, setFiles ] = useState()

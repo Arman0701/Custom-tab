@@ -75,7 +75,6 @@ export const userSlice = createSlice({
 			state = initialState
 		}
     },
-	
 });
 
 export const { initUser, createUser, logout } = userSlice.actions;

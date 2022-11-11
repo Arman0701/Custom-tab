@@ -9,7 +9,6 @@ import SearchPage from "../../pages/SearchPage";
 import style from "./RoutesAnimatedComponent.module.scss";
 import NotesPage from "../../pages/NotesPage";
 import FoldersPage from "../../pages/FoldersPage";
-import AudioPlayerPage from "../../pages/AudioPlayerPage";
 import NotesList from "../NotesList";
 import TodosList from "../TodosList";
 
@@ -40,7 +39,6 @@ export default function RotesAnimatedComponent() {
                 <Route path="/folders" element={<PrivateRoute><FoldersPage /></PrivateRoute>} />
                 <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
                 <Route path="/login" element={<PrivateRoute><LoginPage /></PrivateRoute>} />
-                {/* <Route path="/player" element={<PrivateRoute><AudioPlayerPage /></PrivateRoute>} /> */}
                 <Route path="/sign-in" element={<SignInPage />} /> 
 				
                 <Route path="/search" element={<PrivateRoute><SearchPage /></PrivateRoute>} />
