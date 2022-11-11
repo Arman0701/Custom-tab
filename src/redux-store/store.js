@@ -5,6 +5,7 @@ import foldersSlice from "./foldersSlice";
 import notesSlice from "./notesSlice";
 import settingsSlice from "./settingsSlice";
 import searchSlice from "./searchSlice";
+import playerSlice from "./playerSlice";
 
 export default configureStore({
 	reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
 		notesSlice,
 		settingsSlice,
 		searchSlice,
+		playerSlice,
 	}
 })
