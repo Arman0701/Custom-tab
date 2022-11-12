@@ -37,4 +37,4 @@ export default function FolderEditPopup({ item }) {
             <button onClick={submitHandler}>Edit</button>
         </form>
     );
-}
+    }
