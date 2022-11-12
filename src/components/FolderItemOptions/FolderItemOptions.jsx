@@ -9,7 +9,6 @@ import { removeFolder } from "../../redux-store/foldersSlice";
 
 export default function FolderItemOptions({ item }) {
 	const dispatch = useDispatch()
-
 	function remove() {
 		dispatch(removeFolder(item.id))
 	}

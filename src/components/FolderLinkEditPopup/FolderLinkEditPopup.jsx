@@ -24,8 +24,8 @@ export default function FolderLinkEditPopup({ item }) {
 
     return (
         <form onSubmit={submitHandler} className={style.editPopupWrapper}>
-            <input type="text" placeholder="Title" ref={titleRef} />
-            <input type="text" placeholder="Address" ref={addressRef} />
+            <input type="text" placeholder="Title" autoFocus defaultValue={item.title} ref={titleRef} />
+            <input type="text" placeholder="Address" defaultValue={item.address} ref={addressRef} />
             <button onClick={submitHandler}>Edit</button>
         </form>
     );

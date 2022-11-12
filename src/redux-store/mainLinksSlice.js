@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import addToDb from "../helpers/addToDb";
 import { v4 as getID } from "uuid";
 import { logout } from "./userSlice";
+import { moveToGeneral } from "./foldersSlice";
 
 const initialState = {
 	value: [],
@@ -36,7 +37,7 @@ export const mainLinksSlice = createSlice({
             // payload === link.id
 
             state.value = state.value.filter((link) => link.id !== payload);
-			addToDb('mainLinks/', [...state.value])
+			addToDb('mainLinks/', state.value)
         },
         editLink(state, { payload }) {
             // payload === link.id title address
@@ -69,7 +70,7 @@ export const mainLinksSlice = createSlice({
                 }
                 return link;
             });
-			addToDb('mainLinks/', [...state.value])
+			addToDb('mainLinks/', state.value)
         },
 		hideLink(state, {payload}) {
 			// payload === link.id
@@ -83,13 +84,19 @@ export const mainLinksSlice = createSlice({
 				}
 				return link;
 			})
-			addToDb('mainLinks/', [...state.value])
+			addToDb('mainLinks/', state.value)
 		}
     },
 	extraReducers: (builder) => {
-		builder.addCase(logout, state => {
+		builder.addCase(logout, (state) => {
 			console.log("main links");
 			state = initialState
+		})
+		builder.addCase(moveToGeneral, (state, {payload}) => {
+			console.log('Log payload.actualLink[0] ::: ', payload.actualLink[0])
+			state.value = [...state.value, payload.actualLink[0]]
+
+			addToDb("folders/", [...state.value, payload.actualLink[0]])
 		})
 	}
 });

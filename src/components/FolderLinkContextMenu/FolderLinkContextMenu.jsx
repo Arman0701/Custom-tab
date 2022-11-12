@@ -8,7 +8,8 @@ import copy from "../../assets/icons/copy.svg";
 import { useDispatch } from "react-redux";
 import { removeLinkFromFolder, toggleFavStateInFolder } from "../../redux-store/foldersSlice";
 import Popup from "reactjs-popup";
-import FolderLinkEditPopup from "../FolderLinkEditPopup/FolderLinkEditPopup";
+import FolderLinkEditPopup from "../FolderLinkEditPopup";
+import MoveToContextMenu from "../MoveToContextMenu";
 
 export default function FolderLinkContextMenu({ item }) {
 	const { id: linkID, isFavourite, address, folderID } = item
@@ -64,11 +65,21 @@ export default function FolderLinkContextMenu({ item }) {
 			</div>
 			<span>Remove</span>
 		</button>
-		<button className={style.menuButton}>
-			<div className={style.iconWrapper}>
-				<img src={moveTo} alt="icon" />
-			</div>
-			<span>Move To</span>
-		</button>
+		<Popup
+			trigger={
+				<button className={style.menuButton}>
+					<div className={style.iconWrapper}>
+						<img src={moveTo} alt="icon" />
+					</div>
+					<span>Move To</span>
+				</button>
+			}
+			arrow={false}
+			nested
+			position="right top"
+			on={["hover"]}
+		>
+			<MoveToContextMenu folderID={folderID} linkID={linkID} />
+		</Popup>
 	</div>
 }

@@ -2,17 +2,17 @@
 
 .folderContentWrapper {
     position: fixed;
-    top: 50%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90vw;
-    min-height: 40vh;
-    max-height: 90vh;
-    border: 2px solid $--white-04;
+    height: 88vh;
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 5px;
     padding: 10px;
     backdrop-filter: blur(5px);
     color: white;
+    overflow-y: hidden;
 
     .folderInfo {
         width: 100%;
@@ -44,6 +44,11 @@
                 height: 100%;
             }
         }
+
+		.name {
+			font-weight: 800;
+
+		}
     }
 
 	.folderLinks {
@@ -51,6 +56,14 @@
 		grid-template-columns: repeat(7, 1fr);
 		grid-template-rows: min-content;
 		margin-top: 10px;
+		gap: 10px;
+		scroll-behavior: smooth;
+		overflow-y: auto;
+		height: 86.5%;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 
     .info {
@@ -58,5 +71,18 @@
         bottom: 0;
         margin-bottom: 10px;
 		font-size: 12px;
+		padding: 5px;
+		border-radius: 5px;
+		background: $--white-04;
+		backdrop-filter: blur(105px);
+		width: calc(100% - 20px);
+
+		p {
+			margin-bottom: 5px;
+		}
+		
+		span {
+			font-weight: 800;
+		}
     }
 }

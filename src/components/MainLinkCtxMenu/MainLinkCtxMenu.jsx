@@ -11,6 +11,7 @@ import LinkEditForm from "../LinkEditForm";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { hideLink, removeLink, toggleFavState } from "../../redux-store/mainLinksSlice";
+import MoveToContextMenu from "../MoveToContextMenu/MoveToContextMenu";
 
 export default function MainLinkCtxMenu({ link }) {
 	const dispatch = useDispatch()
@@ -65,12 +66,21 @@ export default function MainLinkCtxMenu({ link }) {
                 </div>
                 <span>Remove</span>
             </div>
-			<div className={style.menuItem}>
-                <div className={style.menuItemIcon}>
-                    <img src={moveTo} alt="icon" />
-                </div>
-                <span>Move To</span>
-            </div>
+			<Popup
+				trigger={
+					<div className={style.menuItem}>
+						<div className={style.menuItemIcon}>
+							<img src={moveTo} alt="icon" />
+						</div>
+						<span>Move To</span>
+					</div>
+				}
+				arrow={false}
+				nested
+				position="right center"
+			>
+				<MoveToContextMenu position="main" />
+			</Popup>
 			{/* <div className={style.menuItem} onClick={hideLinkHandler}>
                 <div className={style.menuItemIcon}>
                     <img src={hide} alt="icon" />

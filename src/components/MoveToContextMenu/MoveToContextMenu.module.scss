@@ -1,0 +1,41 @@
+@import "../../sass//variables.scss";
+
+.contextMenuWrapper {
+    width: fit-content;
+    padding: 5px;
+    margin: 0 10px;
+    border-radius: 5px;
+    background: $--white-04;
+    backdrop-filter: blur(5px);
+
+	button {
+		width: 100%;
+		color: white;
+		background: none;
+		border: none;
+		font-size: 15px;
+		padding: 5px;
+		margin-bottom: 2px;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: all $--transition;
+		box-shadow: rgb(0 0 0 / 35%) 0px -50px 36px -28px inset;
+
+		&:hover {
+			box-shadow: rgb(50 50 93 / 25%) 0px 30px 60px -12px inset,
+				rgb(0 0 0 / 30%) 0px 18px 36px -18px inset;
+		}
+	}
+
+    .main {
+		color: white;
+        font-weight: 600;
+        padding: 3px 0;
+		margin: 3px 0;
+        border-bottom: 3px solid #000;
+    }
+
+	.folders {
+		margin-top: 5px;
+	}
+}
