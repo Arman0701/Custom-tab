@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import addToDb from "../helpers/addToDb";
 import { v4 as getID } from "uuid";
+import { logout } from "./userSlice";
+
+const initialState = {
+	value: [],
+	isLoading: true,
+}
 
 export const mainLinksSlice = createSlice({
     name: "mainLinksSlice",
-    initialState: {
-        value: [],
-		isLoading: true,
-    },
+    initialState,
     reducers: {
         getLinks(state, { payload }) {
             if (payload) {
@@ -83,6 +86,12 @@ export const mainLinksSlice = createSlice({
 			addToDb('mainLinks/', [...state.value])
 		}
     },
+	extraReducers: (builder) => {
+		builder.addCase(logout, state => {
+			console.log("main links");
+			state = initialState
+		})
+	}
 });
 
 export const {

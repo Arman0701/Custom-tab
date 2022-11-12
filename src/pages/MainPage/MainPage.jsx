@@ -1,4 +1,5 @@
-import { getLinks, toggleSearchBox } from "../../redux-store/mainLinksSlice";
+import { getLinks } from "../../redux-store/mainLinksSlice";
+import { initUser } from "../../redux-store/userSlice"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onValue, ref } from "firebase/database";
@@ -16,8 +17,9 @@ export default function MainPage() {
 
     useEffect(() => {
 		if (userID) {
-			onValue(ref(db, `global/users/${userID}/mainLinks`), snapshot => {
-				dispatch(getLinks(snapshot.val()))
+			onValue(ref(db, `global/users/${userID}`), snapshot => {
+				dispatch(initUser(snapshot.val()))
+				dispatch(getLinks(snapshot.val().mainLinks))
 			})
         }
     }, []);

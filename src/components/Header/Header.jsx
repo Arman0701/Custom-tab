@@ -1,6 +1,7 @@
 import style from "./Header.module.scss";
 import userIcon from "../../assets/icons/user.svg";
 import plusIcon from "../../assets/icons/plus.svg";
+import noteIcon from "../../assets/icons/music.svg";
 import settingsIcon from "../../assets/icons/settings.svg";
 import notebookIcon from "../../assets/icons/notebook.svg";
 import folderTreeIcon from "../../assets/icons/folderTree.svg";
@@ -19,32 +20,31 @@ export default memo(function Header() {
     const { pathname } = useLocation();
 
     const goToRoute = useCallback((route) => {
-		if (pathname !== route) navigate(route);
+        if (pathname !== route) navigate(route);
     }, []);
 
-	function keyDownHandler(e) {
-		console.log('Log e ::: ', e)
-		if (e.ctrlKey && e.shiftKey && e.key === " ") {
-			navigate("/search")
-		}
-	}
+    function keyDownHandler(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === " ") {
+            navigate("/search");
+        }
+    }
 
-	useEffect(() => {
-		window.addEventListener("keydown", keyDownHandler)
-		return () => window.removeEventListener("keydown", keyDownHandler)
-	}, [])
-	
+    useEffect(() => {
+        window.addEventListener("keydown", keyDownHandler);
+        return () => window.removeEventListener("keydown", keyDownHandler);
+    }, []);
+
     return (
         <div className={style.headerWrapper}>
             <Clock />
             <div className={style.headerButtons}>
-                {pathname !== "/" && 
-					<Link to='/'>
-						<div className={style.buttonWrapper} >
-							<img src={home} alt="icon" />
-						</div>
-					</Link>
-				}
+                {pathname !== "/" && (
+                    <Link to="/">
+                        <div className={style.buttonWrapper}>
+                            <img src={home} alt="icon" />
+                        </div>
+                    </Link>
+                )}
                 <Popup
                     trigger={
                         <div className={style.buttonWrapper}>
@@ -56,12 +56,22 @@ export default memo(function Header() {
                 >
                     <AddNewLinkMain />
                 </Popup>
-				<div
-                    className={style.buttonWrapper}
-                    onClick={() => goToRoute("search")}
-                >
-                    <img src={searchIcon} alt="icon" />
-                </div>
+                {pathname !== "/search" && (
+                    <div
+                        className={style.buttonWrapper}
+                        onClick={() => goToRoute("search")}
+                    >
+                        <img src={searchIcon} alt="icon" />
+                    </div>
+                )}
+                {pathname !== "/player" && (
+                    <div
+                        className={style.buttonWrapper}
+                        onClick={() => goToRoute("player")}
+                    >
+                        <img src={noteIcon} alt="icon" />
+                    </div>
+                )}
                 <Popup
                     trigger={
                         <div className={style.buttonWrapper}>

@@ -1,31 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 import addToDb from "../helpers/addToDb"
 
+const initialState = {
+	value: {
+		uid: "",
+		firstName: "",
+		lastName: "",
+		email: "",
+		password: "",
+		mainLinks: [],
+		profileImageURL: "",
+		notes: {
+			todoList: [],
+			noteList: []
+		},
+		folders: {},
+		settings: {
+			themes: [],
+			backgroundImages: [],
+			fonts: [],
+			size: 20,
+			color: "",
+		},
+	},
+	isLoading: true
+}
+
 export const userSlice = createSlice({
     name: "userSlice",
-    initialState: {
-        value: {
-			uid: "",
-			firstName: "",
-			lastName: "",
-			email: "",
-			password: "",
-			mainLinks: [],
-			notes: {
-				todoList: [],
-				noteList: []
-			},
-			folders: {},
-			settings: {
-				themes: [],
-				backgroundImages: [],
-				fonts: [],
-				size: 20,
-				color: "",
-			},
-		},
-		isLoading: true
-    },
+    initialState,
     reducers: {
         initUser(state, { payload }) {
 			state.value = payload
@@ -51,18 +54,8 @@ export const userSlice = createSlice({
                         },
                     },
                     backgroundImages: {
-                        // [iamge.id]: {
-                        // 	id: 651,
-                        // 	name: "",
-                        // 	isActive: false
-                        // },
                     },
                     fonts: {
-                        // [font.id]: {
-                        // 	id: 4654,
-                        // 	name: "",
-                        // 	isActive: false
-                        // }
                     },
                     size: 20,
                     color: "",
@@ -77,8 +70,12 @@ export const userSlice = createSlice({
 			addToDb(null, newUserData)
             state.value = newUserData;
         },
+		logout(state) {
+			console.log("user");
+			state = initialState
+		}
     },
 });
 
-export const { initUser, createUser } = userSlice.actions;
+export const { initUser, createUser, logout } = userSlice.actions;
 export default userSlice.reducer;

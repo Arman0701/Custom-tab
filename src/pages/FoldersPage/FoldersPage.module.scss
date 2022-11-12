@@ -1,0 +1,39 @@
+@import "../../sass/variables.scss";
+
+.foldersPageWrapper {
+    width: 100%;
+    height: $--abs-height;
+    padding: 15px;
+
+    .folderAddButton {
+        width: 28px;
+        height: 28px;
+        padding: 4px;
+        border: 2px solid white;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all $--transition;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+            border: none;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .foldersWrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: min-content;
+        gap: 15px;
+        margin-top: 15px;       
+    }
+}

@@ -1,11 +1,13 @@
 import { onValue, ref } from "firebase/database";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { initUser } from "../../redux-store/userSlice";
 import { db } from "../../firebase/config";
 import style from "./AccountPage.module.scss";
 import pageFavIcon from "../../assets/icons/pageFavIcon.ico";
+import userIcon from "../../assets/icons/user.svg";
+import plus from "../../assets/icons/plus.svg";
 import Loader from "../../components/Loader";
 import Popup from "reactjs-popup";
 import UploadFile from "../../components/UploadFile";
@@ -16,14 +18,23 @@ import localStorageHook from "../../hooks/useLocalStorage";
 export default function AccountPage() {
 	const user = useSelector(store => store.userSlice.value)
 	const userID = localStorage.getItem('current-user-id')
-	const [show, setShow] = useState(false) // state for hidden content
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const logoutHandler = useCallback(() => {
+	// this code nedde to refactoring .................... //////////////
+	// use ExtraReducers for each slice
+	function logoutHandler() {
 		localStorageHook("current-user-id", null, "remove")
 		navigate('/login')
-	}, [])
+
+		setTimeout(() => {
+			window.location.reload()
+		}, 100);
+	}
+
+	function profileImageErrorHandler() {
+		
+	}
 	
 	useEffect(() => {
 		onValue(ref(db, `global/users/${userID}`), snapshot => {
@@ -56,7 +67,13 @@ export default function AccountPage() {
 							arrow={false}
 							position="bottom center"
 						>
-							<UploadFile multiple={true} accept={['.gif, .ico, .jpg, .svg, .webp']} />
+							<UploadFile options={{
+								accept: ['.gif, .ico, .jpg, .jpeg, .svg, .webp'],
+								multiple: false,
+								storagePath: "background-images/",
+								dbPath: "settings/backgroundImages/",
+								sliceValue: user.settings.backgroundImages
+							}} />
 						</Popup>
 						<Popup
 							trigger={<p className={style.accountSettingButton}>Add custom theme colors</p>}
@@ -79,9 +96,28 @@ export default function AccountPage() {
 		</header>
 		<main>
 			<div className={style.userBlock}>
-				<div className={style.userImage}>
-					<img src={{}} alt="user" />
-				</div>
+				<Popup
+					trigger={
+						<div className={style.userImage}>
+							<img src={user.profileImage?.imageURL || userIcon} alt="user" onError={profileImageErrorHandler} />
+							<div className={style.imageEffect}>
+								<div className={style.iconWrapper}>
+									<img src={plus} alt="icon" />
+								</div>
+								<span>Add profile image</span>
+							</div>
+						</div>
+					}
+					arrow={false}
+					position="bottom center"
+				>
+					<UploadFile options={{
+						accept: ['.gif, .ico, .jpg, .jpeg, .svg, .webp'],
+						multiple: false,
+						sotragePath: "profile-images/",
+						dbPath: "profileImage/",
+					}} />
+				</Popup>
 				<div className={style.userAbout}>
 					<p>{user.firstName}</p>
 					<p>{user.lastName}</p>

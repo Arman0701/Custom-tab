@@ -1,18 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import addToDb from "../helpers/addToDb";
+import { logout } from "./userSlice";
+
+const initialState = {
+	value: {
+		themes: [],
+		backgroundImages: [],
+		fonts: [],
+		size: 16,
+		color: "#ffffff",
+	},
+	isLoading: true
+}
 
 export const settingsSlice = createSlice({
     name: "settingsSlice",
-    initialState: {
-		value: {
-			themes: [],
-			backgroundImages: [],
-			fonts: [],
-			size: 16,
-			color: "#ffffff",
-		},
-		isLoading: true
-    },
+    initialState,
     reducers: {
         getSettings(state, { payload }) {
             if (payload) {
@@ -53,6 +56,12 @@ export const settingsSlice = createSlice({
 			addToDb('settings/', state.value)
 		}
     },
+	extraReducers: builder => {
+		builder.addCase(logout, state => {
+			console.log("settings");
+			state = initialState
+		})
+	}
 });
 
 export const {

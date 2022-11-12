@@ -40,9 +40,10 @@ export default function MainLinkCtxMenu({ link }) {
 						<span>Edit</span>
 					</div>
 				}
-				position="top center"
+				position="right center"
 				keepTooltipInside
 				arrow={false}
+				nested
 			>
 				<LinkEditForm link={link} />
 			</Popup>

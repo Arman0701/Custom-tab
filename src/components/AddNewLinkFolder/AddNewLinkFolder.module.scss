@@ -1,0 +1,60 @@
+@import "../../sass/variables.scss";
+
+.newFolderLinkWrapper {
+    width: fit-content;
+    padding: 10px;
+    border: 2px solid $--white-04;
+    border-radius: 6px;
+    width: 32vw;
+    background: $--black-04;
+
+    h3 {
+        color: white;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    form {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        input[type="text"] {
+            width: 100%;
+            padding: 3px 8px;
+            color: white;
+            font-size: 15px;
+            border: none;
+            border-bottom: 2px solid $--white-04;
+            background: none;
+
+            &::placeholder {
+                font-size: 15px;
+                color: white;
+            }
+        }
+
+        button {
+            border-radius: 5px;
+            border: 2px solid $--white-04;
+            padding: 5px;
+            background: none;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all $--transition;
+            margin-top: 10px;
+
+			&:hover {
+				box-shadow: rgb(255, 255, 255) 0px 20px 30px -10px;
+			}
+            &:active {
+                border-color: white;
+                color: $--white-04;
+                box-shadow: rgba(173, 167, 167, 0.25) 0px 30px 60px -12px inset,
+                    rgba(212, 212, 212, 0.3) 0px 18px 36px -18px inset;
+            }
+        }
+    }
+}

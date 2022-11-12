@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as getID } from "uuid";
 import addToDb from "../helpers/addToDb";
+import { logout } from "./userSlice";
+
+const initialState =  {
+	value: {
+		todoList: [],
+		noteList: []
+	}
+}
 
 export const notesSlice = createSlice({
 	name: "notesSlice",
-	initialState: {
-		value: {
-			todoList: [],
-			noteList: []
-		}
-	},
+	initialState,
 	reducers: {
 		initNotes(state, {payload}) {
 			if (payload) state.value.noteList = payload
@@ -76,7 +79,6 @@ export const notesSlice = createSlice({
 			addToDb("/notes/todoList", [ ...state.value.todoList])
 		},
 		toggleTodoState(state, {payload}) {
-			console.log('asdfasdf');
 			state.value.todoList = [...state.value.todoList.map(todo => {
 				if (todo.id === payload) {
 					return {
@@ -106,6 +108,12 @@ export const notesSlice = createSlice({
 			state.value.todoList = []
 			addToDb("/notes/todoList", [ ...state.value.todoList])
 		}
+	},
+	extraReducers: builder => {
+		builder.addCase(logout, state => {
+			console.log("notes");
+			state = initialState
+		})
 	}
 });
 

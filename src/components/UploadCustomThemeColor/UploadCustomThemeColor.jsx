@@ -10,7 +10,6 @@ export default function UploadCustomThemeColor() {
 	const textRef = useRef()
 	const colorRef = useRef()
 	const themes = useSelector(store => store.settingsSlice.value.settings?.themes) || []
-	console.log('Log themes ::: ', themes)
 
     function colorChangeHandler(e) {
         setColor(e.target.value);
