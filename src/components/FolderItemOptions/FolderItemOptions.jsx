@@ -1,7 +1,7 @@
 import style from "./FolderItemOptions.module.scss";
 import pencil from "../../assets/icons/pencil.svg";
 import trash from "../../assets/icons/trash.svg";
-import redo from "../../assets/icons/redo.svg";
+import share from "../../assets/icons/share.svg";
 import Popup from "reactjs-popup";
 import FolderEditPopup from "../FolderEditPopup/FolderEditPopup";
 import { useDispatch } from "react-redux";
@@ -39,7 +39,7 @@ export default function FolderItemOptions({ item }) {
             </div>
 			<div className={style.optButton}>
                 <div className={style.iconWrapper}>
-                    <img src={redo} alt="icon" />
+                    <img src={share} alt="icon" />
                 </div>
 				<span>Share</span>
             </div>
