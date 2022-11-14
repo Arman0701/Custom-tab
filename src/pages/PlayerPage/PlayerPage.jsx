@@ -9,6 +9,13 @@ import {
   shuffleSong,
 } from "../../redux-store/playerSlice";
 import style from "./PlayerPage.module.scss";
+import shuffleIcon from "./../../assets/icons/shuffle.svg";
+import volume2 from "./../../assets/icons/volume.svg";
+import volume1 from "./../../assets/icons/volume1.svg";
+import play from "./../../assets/icons/play.svg";
+import pause from "./../../assets/icons/pause.svg";
+import next from "./../../assets/icons/next.svg";
+import prev from "./../../assets/icons/previous.svg";
 
 function formatMusicTime(val) {
   if (val < 10) return `0${val}`;
@@ -23,7 +30,7 @@ export default function PlayerPage() {
   const dispatch = useDispatch();
 
   const audioPlayer = useRef();
-  const [volume, setVolume] = useState(0.25);
+  const [volume, setVolume] = useState("25");
   const [seekAudio, setSeekAudio] = useState(1);
   const [isMute, setIsMute] = useState({
     muted: false,
@@ -32,8 +39,10 @@ export default function PlayerPage() {
   const [currentTime, setCurrentTime] = useState("00 : 00");
   const [currentDuration, setCurrentDuration] = useState("00 : 00");
 
-  const isRepeat = repeat.isRepeat;
-  const repeatCount = repeat.repeatCount;
+
+  useEffect(() => {
+    audioPlayer.current.volume = volume / 100;
+  }, [volume]);
 
   function playStatus() {
     dispatch(togglePlayingState());
@@ -80,7 +89,9 @@ export default function PlayerPage() {
         : Math.floor(audioPlayer.current.duration - durationMinutes * 60)
     );
     setCurrentDuration(`${durationMinutes} : ${durationSeconds}`);
-    // ! ancnel myus ergin
+    if (musicCurrentTime === musicDuration){
+      nextAudio();
+    }
   }
 
   useEffect(() => {
@@ -106,92 +117,109 @@ export default function PlayerPage() {
   }
 
   return (
-    <div>
-      <div>
-        <h1>{currentSong.title}</h1>
-        <h3>{currentSong.name}</h3>
-      </div>
+    <div className={style.centre}>
+      <div className={style.flexPlayer}>
+        <div className={style.flexAudio}>
+          <div>
+            <h1>{currentSong.title}</h1>
+            <h3>{currentSong.name}</h3>
+          </div>
+          <div>
+            <span>{currentTime}</span>
+            <label htmlFor="seek">
+              <input
+                type="range"
+                id="seek"
+                min="1"
+                value={seekAudio}
+                onChange={changeSeek}
+                max="100"
+              />
+            </label>
+            <span>{currentDuration}</span>
+            <audio
+              ref={audioPlayer}
+              src={currentSong.url}
+              onTimeUpdate={updateSeek}
+              onPlay={updatePlay}
+              onPause={updatePause}
+              muted={isMute.muted}
+            >
+              <track kind="captions" />
+            </audio>
+          </div>
+          <div className={style.volumeStyle}>
+            {!isMute.muted ? (
+              <button
+                className={style.audioButt2}
+                onClick={() => {
+                  setIsMute({
+                    muted: true,
+                    valueBeforeMute: volume,
+                  });
+                  setVolume(0);
+                }}
+              >
+                <img className={style.icon} src={volume2} alt="volume" />
+              </button>
+            ) : (
+              <button
+                className={style.audioButt2}
+                onClick={() => {
+                  setIsMute({
+                    valueBeforeMute: volume,
+                    muted: false,
+                  });
+                  setVolume(isMute.valueBeforeMute);
+                }}
+              >
+                <img className={style.icon} src={volume1} alt="volume1" />
+              </button>
+            )}
+            <label htmlFor="volume">
+              Volume &nbsp;
+              <input
+                id="volume"
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={(e) => setVolume(e.target.value)}
+              />
+            </label>
+          </div>
+          <div>
+            <button className={style.audioButt} onClick={prevAudio}>
+              <img className={style.icon} src={prev} alt="prev" />
+            </button>
+            {!isPlaying ? (
+              <button className={style.audioButt} onClick={playStatus}>
+                <img className={style.icon} src={play} alt="play" />
+              </button>
+            ) : (
+              <button className={style.audioButt} onClick={playStatus}>
+                <img className={style.icon} src={pause} alt="pause" />
+              </button>
+            )}
+            <button className={style.audioButt} onClick={nextAudio}>
+              <img className={style.icon} src={next} alt="next" />
+            </button>
 
-      <div>
-        <div>
-          <span>{currentTime}</span>
-          <label htmlFor="seek">
-            <input
-              type="range"
-              id="seek"
-              min="1"
-              value={seekAudio}
-              onChange={changeSeek}
-              max="100"
-            />
-          </label>
-          <span>{currentDuration}</span>
-          <audio
-            ref={audioPlayer}
-            src={currentSong.url}
-            onTimeUpdate={updateSeek}
-            onPlay={updatePlay}
-            onPause={updatePause}
-            muted={isMute.muted}
-          >
-            <track kind="captions" />
-          </audio>
+            {!shuffle ? (
+              <button className={style.audioButt} onClick={isShuffle}>
+                <img className={style.icon} src={shuffleIcon} alt="shuffle" />
+              </button>
+            ) : (
+              <button className={style.audioButt} onClick={isShuffle}>
+                stop shuffle
+              </button>
+            )}
+          </div>
         </div>
-        {!shuffle ? (
-          <button onClick={isShuffle}>shuffle</button>
-        ) : (
-          <button onClick={isShuffle}>stop shuffle</button>
-        )}
-        <div>
-          {!isPlaying ? (
-            <button onClick={playStatus}>play</button>
-          ) : (
-            <button onClick={playStatus}>pause</button>
-          )}
-          <button onClick={nextAudio}>next</button>
-          <button onClick={prevAudio}>prev</button>
-        </div>
-      </div>
 
-      <div>
-        {!isMute.muted ? (
-          <button
-            onClick={() => {
-              setIsMute({
-                muted: true,
-                valueBeforeMute: volume,
-              });
-              setVolume(0);
-            }}
-          >
-            Mute
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              setIsMute({
-                valueBeforeMute: volume,
-                muted: false,
-              });
-              setVolume(isMute.valueBeforeMute);
-            }}
-          >
-            UnMute
-          </button>
-        )}
-        <label htmlFor="volume">
-          Volume &nbsp;
-          <input
-            id="volume"
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={volume}
-            onChange={(e) => setVolume(e.target.value / 100)}
-          />
-        </label>
-        <MusicPlayer audioPlayer={audioPlayer}></MusicPlayer>
+        <div className={style.musicPlayer}>
+          <MusicPlayer audioPlayer={audioPlayer}></MusicPlayer>
+        </div>
       </div>
     </div>
   );

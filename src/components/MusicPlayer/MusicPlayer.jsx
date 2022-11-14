@@ -1,7 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSong, togglePlayingState } from "../../redux-store/playerSlice";
+import {
+  changeSong,
+  togglePlayingState,
+  songListUpdated,
+} from "../../redux-store/playerSlice";
+import styles from "./MusicPlayer.module.scss";
 
 export default function MusicPlayer({ audioPlayer, setShowList }) {
   const currentSong = useSelector((state) => state.playerSlice.currentSong);
@@ -17,23 +22,24 @@ export default function MusicPlayer({ audioPlayer, setShowList }) {
     audioPlayer.current.play();
   }
 
-  //   useEffect(() => {
-  //     dispatch((AllSongs));/update song list
-  //   }, [AllSongs]);
+  useEffect(() => {
+    dispatch(songListUpdated(AllSongs));
+  }, [AllSongs]);
   return (
-    <div>
+    <div className={styles.music}>
       {AllSongs.map((song) => {
         const style =
           song.uuid === currentSong.uuid
             ? {
                 fontSize: "1.5rem",
-                color: "red",
+                color: "pink",
                 fontWeight: "bold",
               }
             : {};
         return (
           <div key={song.uuid}>
             <button
+              className={styles.songs}
               style={style}
               data-song={JSON.stringify(song)}
               onClick={changeCurrentSong}

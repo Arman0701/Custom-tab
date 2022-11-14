@@ -17,7 +17,7 @@ function getRandomMusic(state) {
   if (randomIndex !== indexOfCurrentState(state)) {
     state.currentSong = state.songs[randomIndex];
   } else {
-    return getRandomMusic(state); 
+    return getRandomMusic(state);
   }
 }
 
@@ -81,15 +81,25 @@ const playerSlice = createSlice({
       const newSongIndex = find(state.songs, action.payload);
       state.currentSong = state.songs[newSongIndex];
     },
+    songListUpdated: (state, action) => {
+      state.songs = action.payload;
+    },
   },
 });
 
 export const nextSong = createAction("playerSlice/nextAudio", () => ({}));
 export const prevSong = createAction("playerSlice/prevAudio", () => ({}));
 export const shuffleSong = createAction("playerSlice/shuffle", () => ({}));
-export const changeSong = createAction("player/changeSong", (currentSong) => ({
-  payload: currentSong,
-}));
+export const changeSong = createAction(
+  "playerSlice/changeSong",
+  (currentSong) => ({
+    payload: currentSong,
+  })
+);
+export const songListUpdated = createAction(
+  "playerSlice/songListUpdated",
+  (newSongList) => ({ payload: newSongList })
+);
 export const { togglePlayingState } = playerSlice.actions;
 
 export default playerSlice.reducer;
