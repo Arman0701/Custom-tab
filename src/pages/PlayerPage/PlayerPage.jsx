@@ -41,12 +41,12 @@ import square from "../../assets/icons/square.svg";
 import cross from "../../assets/icons/cross.svg";
 
 import playerScreenDefault from "../../assets/images/playerScreenDefault.png";
-
-import style from "./PlayerPage.module.scss";
 import SongItem from "../../components/SongItem/SongItem";
 import Popup from "reactjs-popup";
 import MessageBox from "../../components/MessageBox";
 import UploadSong from "../../components/UploadSong";
+
+import style from "./PlayerPage.module.scss";
 
 export default function PlayerPage() {
     const userID = localStorageHook("current-user-id");
@@ -59,17 +59,20 @@ export default function PlayerPage() {
 	const songsValue = useSelector(store => store.playerSlice.songs)
 
     useEffect(() => {
-        onValue(ref(db, `global/users/${userID}/player/songs`), (snapshot) => {
+        onValue(ref(db, `global/users/${userID}/player/songs`), (snapshot) => { 
             dispatch(initSongs(snapshot.val()));
         });
     }, []);
 
+    //TO-DO
 	useEffect(() => {
-		let interval;
-		interval = setInterval(isPlaying ? () => {
-			dispatch(setCurrentTime(audioRef.current.currentTime))
-		} : () => {}, 1000)
-		if (!isPlaying) clearInterval(interval)
+        if(audioRef.current.currentTime){
+            let interval;
+            interval = setInterval(isPlaying ? () => {
+                dispatch(setCurrentTime(audioRef.current.currentTime)) // transform this to useState ... 
+            } : () => {}, 1000)
+            if (!isPlaying) clearInterval(interval)
+        }
 	}, [isPlaying, audioRef.current?.currentTime])
 
     function volumeScrollHandler(e) {
@@ -86,17 +89,21 @@ export default function PlayerPage() {
     }
 
     function setDurationHandler(e) {
-		dispatch(setCurrentSongDuration(e.target.duration));
-		if (isPlaying) audioRef.current.play()
+        if(audioRef.current){
+            dispatch(setCurrentSongDuration(e.target.duration));
+            if (isPlaying) audioRef.current.play()
+        }
     }
 
     function setVolumeHandler(e) {
         dispatch(setVolume(Number(e.target.value)));
-        audioRef.current.volume = Number(e.target.value);
+        if(audioRef.current){
+            audioRef.current.volume = Number(e.target.value);
+        }
     }
 	
 	function songSeekHandler(e) {
-		const time = (audioRef.current.duration * e.target.value) / 100;
+		const time = audioRef.current ? (audioRef.current.duration * e.target.value) / 100 : 10;
 		dispatch(setCurrentTime(time));
 		audioRef.current.currentTime = time;
 	}

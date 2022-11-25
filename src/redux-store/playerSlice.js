@@ -32,6 +32,7 @@ export const playerSlice = createSlice({
     initialState,
     reducers: {
         initSongs(state, { payload }) {
+			console.log("elacac valyu" , payload);
 			if (payload) {
 				state.songs = payload.map((song, index) => ({...song, number: index}));
 				state.current = state.songs[0];
@@ -106,8 +107,12 @@ export const playerSlice = createSlice({
         addNewSong(state, { payload }) {
 			console.log('Log payload ::: ', payload)
 			addToDb("player/songs", [...state.songs, ...payload])
-            state.songs = [...state.songs, ...payload]
+			state.songs = [...state.songs, ...payload]
         },
+		addSingleSong(state , {payload}) {
+			addToDb("player/songs", [...state.songs, ...payload])
+			state.songs = [...state.songs, ...payload]
+		},
         deleteSong(state, { payload }) {
 			let currentSongNumber;
             state.songs = state.songs.filter((song) => {
@@ -171,6 +176,7 @@ export const {
     setVolume,
     setSong,
     addNewSong,
+	addSingleSong,
     deleteSong,
 	deleteCurrentSong,
     setCurrentSongDuration,
