@@ -68,7 +68,7 @@ export default function AccountPage() {
 							position="bottom center"
 						>
 							<UploadFile options={{
-								accept: ['.gif, .ico, .jpg, .jpeg, .svg, .webp'],
+								accept: ['.gif, .ico, .jpg, .jpeg, .svg, .webp, .png'],
 								multiple: false,
 								storagePath: "background-images/",
 								dbPath: "settings/backgroundImages/",

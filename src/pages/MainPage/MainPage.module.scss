@@ -3,6 +3,7 @@
 .mainPageWrapper {
 	width: 100%;
 	min-height: $--abs-height;
+	outline: none !important;
 }
 .favouritesWrapper {
 	border-bottom: 2px solid white;

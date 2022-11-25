@@ -11,17 +11,13 @@ import Clock from "../Clock";
 import Popup from "reactjs-popup";
 import AddNewLinkMain from "../AddNewLinkMain";
 import Settings from "../Settings";
-import { memo, useCallback } from "react";
+import { memo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export default memo(function Header() {
     const navigate = useNavigate();
     const { pathname } = useLocation();
-
-    const goToRoute = useCallback((route) => {
-        if (pathname !== route) navigate(route);
-    }, []);
 
     function keyDownHandler(e) {
         if (e.ctrlKey && e.shiftKey && e.key === " ") {
@@ -38,13 +34,13 @@ export default memo(function Header() {
         <div className={style.headerWrapper}>
             <Clock />
             <div className={style.headerButtons}>
-                {pathname !== "/" && (
-                    <Link to="/">
-                        <div className={style.buttonWrapper}>
-                            <img src={home} alt="icon" />
-                        </div>
-                    </Link>
-                )}
+				{pathname !== '/' &&
+					<Link to="/">
+						<div className={style.buttonWrapper}>
+							<img src={home} alt="icon" />
+						</div>
+					</Link>
+				}
                 <Popup
                     trigger={
                         <div className={style.buttonWrapper}>
@@ -56,22 +52,16 @@ export default memo(function Header() {
                 >
                     <AddNewLinkMain />
                 </Popup>
-                {pathname !== "/search" && (
-                    <div
-                        className={style.buttonWrapper}
-                        onClick={() => goToRoute("search")}
-                    >
+                <Link to="/search">
+                    <div className={style.buttonWrapper}>
                         <img src={searchIcon} alt="icon" />
                     </div>
-                )}
-                {pathname !== "/player" && (
-                    <div
-                        className={style.buttonWrapper}
-                        onClick={() => goToRoute("player")}
-                    >
+                </Link>
+                <Link to="/player">
+                    <div className={style.buttonWrapper}>
                         <img src={noteIcon} alt="icon" />
                     </div>
-                )}
+                </Link>
                 <Popup
                     trigger={
                         <div className={style.buttonWrapper}>
@@ -87,24 +77,21 @@ export default memo(function Header() {
                 >
                     <Settings />
                 </Popup>
-                <div
-                    className={style.buttonWrapper}
-                    onClick={() => goToRoute("folders")}
-                >
-                    <img src={folderTreeIcon} alt="icon" />
-                </div>
-                <div
-                    className={style.buttonWrapper}
-                    onClick={() => goToRoute("notes")}
-                >
-                    <img src={notebookIcon} alt="icon" />
-                </div>
-                <div
-                    className={style.buttonWrapper}
-                    onClick={() => goToRoute("account")}
-                >
-                    <img src={userIcon} alt="icon" />
-                </div>
+                <Link to="/folders">
+                    <div className={style.buttonWrapper}>
+                        <img src={folderTreeIcon} alt="icon" />
+                    </div>
+                </Link>
+                <Link to="/notes/todo-list">
+                    <div className={style.buttonWrapper}>
+                        <img src={notebookIcon} alt="icon" />
+                    </div>
+                </Link>
+                <Link to="/account">
+                    <div className={style.buttonWrapper}>
+                        <img src={userIcon} alt="icon" />
+                    </div>
+                </Link>
             </div>
         </div>
     );

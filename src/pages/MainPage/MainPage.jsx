@@ -25,7 +25,7 @@ export default function MainPage() {
     }, []);
 
     return (<>
-		<Loader trigger={value[0] == null} styles={{
+		<Loader trigger={value[0] === null} styles={{
 			position: 'absolute',
 			top: '50%',
 			left: '50%',
@@ -33,7 +33,7 @@ export default function MainPage() {
 		}} />
         <div className={style.mainPageWrapper} >
 			<>
-				{value.length > 0 &&
+				{value.length > 0 ?
 					<>
 						<div className={style.favouritesWrapper}>
 							{value.map(link => link.isFavourite && <MainLinkComponent key={link.id} link={link} /> )}
@@ -41,7 +41,7 @@ export default function MainPage() {
 						<div className={style.simpleLinksWrapper}>
 							{value.map(link => !link.isFavourite && <MainLinkComponent key={link.id} link={link} /> )}
 						</div>
-					</> 
+					</> : null
 				}
 				<MessageBox trigger={value[0] == null}
 					message="There is no links. You can create one now using plus on the top right corner."

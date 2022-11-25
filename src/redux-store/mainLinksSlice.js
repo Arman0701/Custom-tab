@@ -108,6 +108,10 @@ export const {
     removeLink,
     toggleFavState,
     getLinks,
+
+	setSearchInput,
+	searchingTriggerToggler,
+
 } = mainLinksSlice.actions;
 export default mainLinksSlice.reducer;
 

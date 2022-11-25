@@ -1,0 +1,21 @@
+.searchOutputWrapper {
+	width: 100%;
+	padding: 10px;
+	color: white;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	position: relative;
+	
+
+	.message {
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		transform: translate(-50%);
+		font-weight: 700;
+		color: white;
+		padding: 5px 12px;
+		border-radius: 6px;
+		background-color: crimson;
+	}
+}
