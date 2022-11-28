@@ -1,41 +1,42 @@
-	import { Route, Routes, useLocation } from "react-router-dom";
-	import { animated, useTransition } from "react-spring";
-	import PrivateRoute from "../PrivateRoute";
-	import AccountPage from "../../pages/AccountPage";
-	import LoginPage from "../../pages/LoginPage";
-	import MainPage from "../../pages/MainPage";
-	import SignInPage from "../../pages/SignInPage";
-	import SearchPage from "../../pages/SearchPage";
-	import style from "./RoutesAnimatedComponent.module.scss";
-	import NotesPage from "../../pages/NotesPage";
-	import FoldersPage from "../../pages/FoldersPage";
-	import NotesList from "../NotesList";
-	import TodosList from "../TodosList";
-	import PlayerPage from "../../pages/PlayerPage/PlayerPage";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { animated, useTransition } from "react-spring";
 
-	export default function RotesAnimatedComponent() {
-	const location = useLocation();
-	const transitions = useTransition(location, {
-		from: { opacity: 0 },
-		enter: { opacity: 1 },
-		leave: { opacity: 0 },
-	});
+import AccountPage from "../../pages/AccountPage";
+import LoginPage from "../../pages/LoginPage";
+import MainPage from "../../pages/MainPage";
+import SignInPage from "../../pages/SignInPage";
+import SearchPage from "../../pages/SearchPage";
+import NotesPage from "../../pages/NotesPage";
+import FoldersPage from "../../pages/FoldersPage";
+import PlayerPage from "../../pages/PlayerPage";
 
-	return transitions((props, item) => (
-		<animated.div
+import PrivateRoute from "../PrivateRoute";
+import TodoListWrapper from "../../components/TodoListWrapper"; 
+import style from "./RoutesAnimatedComponent.module.scss";
+
+export default function RotesAnimatedComponent() {
+const location = useLocation();
+const transitions = useTransition(location, {
+	from: { opacity: 0 },
+	enter: { opacity: 1 },
+	leave: { opacity: 0 },
+});
+
+return transitions((props, item) => (
+	<animated.div
 		style={{
 			...props,
 			position: "absolute",
 			width: "100%",
 			height: "100%",
 		}}
-		>
+	>
 		<Routes location={item}>
 			<Route path="/" element={<PrivateRoute><MainPage /></PrivateRoute>} />
 			<Route path="/player" element={<PrivateRoute><PlayerPage /></PrivateRoute>} />
 			<Route path="/notes" element={<PrivateRoute><NotesPage /></PrivateRoute>} >
-				<Route path="todo-list" element={<PrivateRoute><TodosList /></PrivateRoute>} />
-				<Route path="note-list" element={<PrivateRoute><NotesList /></PrivateRoute>} />
+				<Route path="todo-list" element={<PrivateRoute><TodoListWrapper /></PrivateRoute>} />
+				<Route path="note-list" element={<PrivateRoute></PrivateRoute>} />
 			</Route>
 			<Route path="/folders" element={<PrivateRoute><FoldersPage /></PrivateRoute>} />
 			<Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
@@ -44,6 +45,6 @@
 			<Route path="/sign-in" element={<SignInPage />} />
 		</Routes>
 		<p className={style.footer}>Made by Arman Tadevosyan</p>
-		</animated.div>
-	));
-	}
+	</animated.div>
+));
+}

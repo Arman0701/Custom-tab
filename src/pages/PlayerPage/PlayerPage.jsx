@@ -35,7 +35,6 @@ import trash from "../../assets/icons/trash.svg";
 import star from "../../assets/icons/star.svg";
 import starColored from "../../assets/icons/starColored.svg";
 import download from "../../assets/icons/download.svg";
-import list from "../../assets/icons/list.svg";
 import burger from "../../assets/icons/burger.svg";
 import square from "../../assets/icons/square.svg";
 import cross from "../../assets/icons/cross.svg";
@@ -64,15 +63,12 @@ export default function PlayerPage() {
         });
     }, []);
 
-    //TO-DO
 	useEffect(() => {
-        if(audioRef.current.currentTime){
-            let interval;
-            interval = setInterval(isPlaying ? () => {
-                dispatch(setCurrentTime(audioRef.current.currentTime)) // transform this to useState ... 
-            } : () => {}, 1000)
-            if (!isPlaying) clearInterval(interval)
-        }
+		let interval;
+		interval = setInterval(isPlaying ? () => {
+			dispatch(setCurrentTime(audioRef.current.currentTime))
+		} : () => {}, 1000)
+		if (!isPlaying) clearInterval(interval)
 	}, [isPlaying, audioRef.current?.currentTime])
 
     function volumeScrollHandler(e) {
@@ -89,10 +85,8 @@ export default function PlayerPage() {
     }
 
     function setDurationHandler(e) {
-        if(audioRef.current){
-            dispatch(setCurrentSongDuration(e.target.duration));
-            if (isPlaying) audioRef.current.play()
-        }
+		dispatch(setCurrentSongDuration(e.target.duration));
+		if (isPlaying) audioRef.current.play()
     }
 
     function setVolumeHandler(e) {
@@ -103,7 +97,7 @@ export default function PlayerPage() {
     }
 	
 	function songSeekHandler(e) {
-		const time = audioRef.current ? (audioRef.current.duration * e.target.value) / 100 : 10;
+		const time = (audioRef.current.duration * e.target.value) / 100;
 		dispatch(setCurrentTime(time));
 		audioRef.current.currentTime = time;
 	}
@@ -183,7 +177,7 @@ export default function PlayerPage() {
                 {songs[0] ?
                     songs.map((item) => <SongItem key={item.id} item={item} />) :
 					<MessageBox
-						trigger={true}
+						trigger={!!songs[0]}
 						message="No songs yet. Please add them by click on 'Upload song'."
 						customStyles={{
 							position: "absolute",
@@ -193,11 +187,12 @@ export default function PlayerPage() {
 							border: "1px solid white",
 							zIndex: "9999",
 						}}
-            />
+					/>
 				}
             </div>
             <div className={style.player}>
                 <audio
+					id="audioElement"
                     src={current.songURL}
                     loop={repeatCurrent}
                     volume={volume}
@@ -209,7 +204,6 @@ export default function PlayerPage() {
                 <div className={style.screen}>
                     <img
 						className={isPlaying ? style.rotate : style.noop}
-                        // src={current.imageURL || playerScreenDefault}
 						src={playerScreenDefault}
                         alt="song default"
                     />
@@ -323,12 +317,6 @@ export default function PlayerPage() {
 							}} />
                         </Popup>
                     </div>
-                    <button>
-                        <div className={style.iconWrapper}>
-                            <img src={list} alt="icon" />
-                        </div>
-                        <span>Add to list</span>
-                    </button>
                 </div>
             </div>
         </div>

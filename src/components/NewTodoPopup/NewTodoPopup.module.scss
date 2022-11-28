@@ -1,0 +1,128 @@
+@import "../../sass/variables.scss";
+
+.newTodoPopupWrapper {
+    width: 80vw;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid $--white-04;
+    display: flex;
+    align-items: center;
+	backdrop-filter: blur(5px);
+
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    input[type="text"] {
+        width: 100%;
+        padding: 6px;
+        padding-right: 17%;
+        border-radius: 4px;
+        background: none;
+        border: 1px solid $--white-04;
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+
+        &::placeholder {
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+    }
+
+    .options {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+
+        position: absolute;
+        right: 8px;
+
+        button, div:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: white;
+            padding: 6px;
+            cursor: pointer;
+            transition: all $--transition;
+            border-radius: 4px;
+			font-size: 15px;
+			font-weight: 600;
+
+            &:hover {
+                background: $--white-04;
+            }
+
+            &:has(img) {
+                width: 28px;
+                aspect-ratio: 1/1;
+
+                position: relative;
+                padding: 4px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                input[type="color"] {
+                    width: 0;
+                    height: 0;
+                    opacity: 0;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                }
+            }
+            &:has(img):hover {
+                background: $--white-04;
+                border-radius: 4px;
+            }
+        }
+
+        .priorityWrapper {
+            padding: 4px;
+            height: 35px;
+
+            details {
+                width: fit-content;
+                background: none;
+                color: white;
+                border: none;
+                transition: all $--transition;
+                outline: none;
+            }
+            summary {
+                padding: 3px 8px;
+                font-size: 15px;
+                font-weight: 600;
+
+                &:hover {
+                    background: $--white-04;
+                    border-radius: 4px;
+                }
+            }
+            .option {
+                background: none;
+                padding: 3px;
+                border: 2px solid $--white-04;
+                border-radius: 4px;
+                margin: 3px 0;
+				transition: all $--transition;
+                box-shadow: rgba(255, 255, 255, 0.25) 0px 13px 27px -5px,
+                    rgba(255, 255, 255, 0.3) 0px 8px 16px -8px;
+
+                &:hover {
+					backdrop-filter: blur(5px);
+                    box-shadow: rgba(255, 255, 255, 0.25) 0px 30px 60px -12px inset,
+                        rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+                }
+            }
+        }
+    }
+}
