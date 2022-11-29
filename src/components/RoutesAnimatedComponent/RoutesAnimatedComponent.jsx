@@ -13,6 +13,7 @@ import PlayerPage from "../../pages/PlayerPage";
 import PrivateRoute from "../PrivateRoute";
 import TodoListWrapper from "../../components/TodoListWrapper"; 
 import style from "./RoutesAnimatedComponent.module.scss";
+import NoteListWrapper from "../NoteListWrapper/NoteListWrapper";
 
 export default function RotesAnimatedComponent() {
 const location = useLocation();
@@ -36,7 +37,7 @@ return transitions((props, item) => (
 			<Route path="/player" element={<PrivateRoute><PlayerPage /></PrivateRoute>} />
 			<Route path="/notes" element={<PrivateRoute><NotesPage /></PrivateRoute>} >
 				<Route path="todo-list" element={<PrivateRoute><TodoListWrapper /></PrivateRoute>} />
-				<Route path="note-list" element={<PrivateRoute></PrivateRoute>} />
+				<Route path="note-list" element={<PrivateRoute><NoteListWrapper /></PrivateRoute>} />
 			</Route>
 			<Route path="/folders" element={<PrivateRoute><FoldersPage /></PrivateRoute>} />
 			<Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />

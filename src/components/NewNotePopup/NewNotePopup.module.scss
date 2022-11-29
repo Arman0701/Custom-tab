@@ -1,0 +1,116 @@
+@import "../../sass/variables.scss";
+
+.notePopupWrapper {
+    width: 50vw;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid $--white-04;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        input {
+            width: 100%;
+            padding: 6px;
+            padding-right: 35px;
+            border-radius: 4px;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+
+            &::placeholder {
+                color: white;
+                font-weight: 600;
+                font-size: 16px;
+            }
+        }
+        div {
+            border-radius: 3px;
+            width: 28px;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            right: 2px;
+            transition: all $--transition;
+            cursor: pointer;
+
+            position: absolute;
+
+            &:hover {
+                background: $--white-04;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            input[type="color"] {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: -1;
+            }
+        }
+    }
+
+    textarea {
+        width: 100%;
+		height: 200px;
+		min-height: 200px;
+		max-height: 350px;
+        resize: vertical;
+        margin-top: 5px;
+        border: 2px solid $--white-04;
+        background: none;
+        transition: all $--transition;
+        outline: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+		padding: 6px;
+		border-radius: 4px;
+
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+
+        &::placeholder {
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+	button {
+		width: 100%;
+		padding: 6px;
+		background: none;
+		border: 2px solid $--white-04;
+		border-radius: 4px;
+		text-align: center;
+        margin-top: 5px;
+		outline: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+		cursor: pointer;
+	}
+}

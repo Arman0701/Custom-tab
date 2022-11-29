@@ -32,6 +32,8 @@ export default function NewTodoPopup() {
 			background: colorRef.current.value,
 			priority,
 		}))
+
+		inputRef.current.value = ""
 	}
 	
     return <form onSubmit={onSubmitHandler} className={style.newTodoPopupWrapper}>

@@ -43,6 +43,13 @@ export default function TodoTask({ todo }) {
         e.stopPropagation();
     }
 
+	function inputkeyDownHandler(e) {
+		if (e.key === "Enter") {
+			taskEditHandler();
+			setEditModeHandler(e)
+		}
+	}
+
     return (
         <div
             className={style.taskWrapper}
@@ -65,6 +72,7 @@ export default function TodoTask({ todo }) {
                     defaultValue={todo.title}
                     ref={inputRef}
                     onClick={inputClickHandler}
+					onKeyDown={inputkeyDownHandler}
                 />
             ) : (
                 <p>{todo.title}</p>

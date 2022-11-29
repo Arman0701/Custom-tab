@@ -78,7 +78,7 @@ export const notesSlice = createSlice({
             if (payload) state.notes = payload;
         },
         addNote(state, { payload }) {
-            if (payload.title) {
+            if (payload.title && payload.description) {
                 state.notes = [
                     ...state.notes,
                     {
@@ -92,10 +92,37 @@ export const notesSlice = createSlice({
                             minute: "2-digit",
                         }),
                         ...payload,
+						background: `rgba(${hex2rgb(
+                            payload.background
+                        )}, 0.21)`,
+						description: JSON.stringify(payload.description)
                     },
                 ];
+				addToDb("notes/noteList", state.notes)
             }
         },
+		editNote(state, {payload}) {
+			if (payload.title && payload.description) {
+				state.notes = state.notes.map(note => {
+					if (note.id === payload.id) {
+						return {
+							...note,
+							...payload,
+							background: `rgba(${hex2rgb(
+								payload.background
+							)}, 0.21)`,
+							description: JSON.stringify(payload.description)
+						}
+					}
+					return note;
+				})
+				addToDb("notes/noteList", state.notes)
+			}
+		},
+		deleteNote(state, {payload}) {
+			state.notes = state.notes.filter(note => note.id !== payload)
+			addToDb("notes/noteList", state.notes)
+		}
     },
 });
 
@@ -108,5 +135,7 @@ export const {
 
     initNotes,
     addNote,
+	editNote,
+	deleteNote,
 } = notesSlice.actions;
 export default notesSlice.reducer;
