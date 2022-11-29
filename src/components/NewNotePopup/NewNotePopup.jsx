@@ -28,12 +28,6 @@ export default function NewNotePopup() {
 		inputRef.current.value = ""
 		descriptionRef.current.value = ""
 	}
-
-	function keyDownHandler(e) {
-		if (e.key === "Enter") {
-			onSubmitHandler(e)
-		}
-	}
 	
     return <form className={style.notePopupWrapper} onSubmit={onSubmitHandler}>
 		<div className={style.header}>
@@ -43,7 +37,7 @@ export default function NewNotePopup() {
 				<input type="color" ref={colorRef} defaultValue="#FFFFFF" />
 			</div>
 		</div>
-		<textarea ref={descriptionRef} placeholder="Note description here..." onKeyDown={keyDownHandler}></textarea>
+		<textarea  ref={descriptionRef} placeholder="Note description here..."></textarea>
 		<button>Add note</button>
 	</form>
 }

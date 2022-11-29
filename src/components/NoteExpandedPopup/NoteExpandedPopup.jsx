@@ -31,6 +31,18 @@ export default function NoteExpandedPopup({ item, setOpen }) {
 		setEditMode(m => !m)
 	}
 
+	function tabButtonModifyingHandler(e) {
+		if (e.key === "Tab") {
+			e.preventDefault();
+			var start = descriptionRef.current.selectionStart;
+			var end = descriptionRef.current.selectionEnd;
+		
+			descriptionRef.current.value = descriptionRef.current.value.substring(0, start) + "\t" + descriptionRef.current.value.substring(end);
+		
+			descriptionRef.current.selectionStart = descriptionRef.current.selectionEnd = start + 1;
+		}
+	}
+
 	function removeHandler() {
 		dispatch(deleteNote(id))
 		setOpen(false)
@@ -45,10 +57,10 @@ export default function NoteExpandedPopup({ item, setOpen }) {
 	}}>
 		{!editMode ? <>
 			<h3>{title}</h3>	
-			<p>{description}</p>
+			<pre>{JSON.parse(description)}</pre>
 		</> : <>
 			<input type="text" defaultValue={title} ref={inputRef} autoFocus placeholder="Note title here..." />
-			<textarea placeholder="Note description here..." ref={descriptionRef} defaultValue={description}></textarea>
+			<textarea placeholder="Note description here..." onKeyDown={tabButtonModifyingHandler} ref={descriptionRef} defaultValue={JSON.parse(description)}></textarea>
 		</>
 		}
 		<span>{creationDate}</span>

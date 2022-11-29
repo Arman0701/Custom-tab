@@ -28,7 +28,7 @@ export default function NoteItem({ note }) {
 				<NoteExpandedPopup item={note} setOpen={setOpen} />
 			</Popup>
 		</div>
-		<p>{note.description}</p>
+		<p>{JSON.parse(note.description)}</p>
 		<span>{note.creationDate}</span>
 	</div>;
 }
